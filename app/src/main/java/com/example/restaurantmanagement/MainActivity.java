@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 String email = mEmailField.getText().toString();
                 String password = mPasswordField.getText().toString();
                 if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Email hoặc mật khẩu bị bỏ trống ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Email hoặc mật khẩu đã bị bỏ trống ", Toast.LENGTH_SHORT).show();
                 } else
                     DangNhap();
             }
