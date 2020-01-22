@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.restaurantmanagement.TableManagement.TableActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -47,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     DangNhap();
             }
         });
-
-
 
 
         imgSignUp.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(MainActivity.this, NextActivity.class));
+                            startActivity(new Intent(MainActivity.this, TableActivity.class));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
