@@ -1,24 +1,30 @@
 package com.example.restaurantmanagement.TableManagement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.restaurantmanagement.PayActivity.PayFoodActivity;
 import com.example.restaurantmanagement.R;
+import com.example.restaurantmanagement.RestaurantMenu.RestaurantMenuActivity;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
-
+    public static int pos;
     List<TableInfo> tableInfos = new ArrayList<>();
     Context context;
     String tableName[] = {"Bàn 01", "Bàn 02", "Bàn 03", "Bàn 04", "Bàn 05", "Bàn 06", "Bàn 07", "Bàn 08", "Bàn 09", "Bàn 10",
@@ -50,7 +56,36 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
         imgTable.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(context, "AAAA", Toast.LENGTH_SHORT).show();
+                PopupMenu popupMenu = new PopupMenu(context, view);
+
+                popupMenu.getMenuInflater().inflate(R.menu.menu_table_diagram, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.menuTableSelectFood:
+                                Intent intentSelectedFood = new Intent(context, RestaurantMenuActivity.class);
+                                pos = temp + 1;
+                                context.startActivity(intentSelectedFood);
+                                break;
+                            case R.id.menuTablePay:
+                                Intent intentPay = new Intent(context, PayFoodActivity.class);
+                                pos = temp + 1;
+                                context.startActivity(intentPay);
+                                break;
+                            case R.id.menuTableCancel:
+                                //  mData = FirebaseDatabase.getInstance().getReference("Table/" + "tb" + Integer.toString(TableDiagramAdapter.pos) + "/ListOder/");
+                                //  mData2 = FirebaseDatabase.getInstance().getReference("Table/" + "tb" + Integer.toString(TableDiagramAdapter.pos) + "/");
+                                //  cancelTable(view);
+                                break;
+                        }
+
+                        return false;
+                    }
+                });
+                popupMenu.show();
+                Toast.makeText(context, temp + 1 + "", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
