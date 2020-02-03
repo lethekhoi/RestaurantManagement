@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.FullScreen">
-        <activity android:name=".PayActivity.PayFoodActivity"></activity>
+        <activity android:name=".OrderActivity.OrderActivity"></activity>
+        <activity android:name=".PayActivity.PayFoodActivity" />
         <activity android:name=".RestaurantMenu.RestaurantMenuActivity" />
         <activity android:name=".TableManagement.TableActivity" />
         <activity android:name=".NextActivity" />

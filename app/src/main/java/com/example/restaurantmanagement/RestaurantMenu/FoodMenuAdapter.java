@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.restaurantmanagement.OrderActivity.OrderActivity;
 import com.example.restaurantmanagement.R;
 import com.squareup.picasso.Picasso;
 
@@ -43,17 +44,17 @@ public class FoodMenuAdapter extends RecyclerView.Adapter {
         myFoodMenuViewHolder.txtMenuNameFood.setText(menuInfo.getFoodName());
         myFoodMenuViewHolder.txtMemuPrice.setText(menuInfo.getPrice() + "d");
         Picasso.get().load(menuInfo.getUrl()).into(myFoodMenuViewHolder.imgMenuFood);
-        myFoodMenuViewHolder.imgMenuFood.setOnClickListener(new View.OnClickListener() {
+        myFoodMenuViewHolder.imgAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent iFood = new Intent(view.getContext(), OrderActivity.class);
-//                Bundle bFood = new Bundle();
-//                bFood.putSerializable("infoFood", menuFoodList);
-//                bFood.putInt("position", holder.getAdapterPosition());
-//                bFood.putInt("type", 0);
-//                iFood.putExtras(bFood);
-//                view.getContext().startActivity(iFood);
-//                ((Activity) view.getContext()).finish();
+                Intent iFood = new Intent(view.getContext(), OrderActivity.class);
+                Bundle bFood = new Bundle();
+                bFood.putSerializable("infoFood", menuFoodList);
+                bFood.putInt("position", holder.getAdapterPosition());
+                bFood.putInt("type", 0);
+                iFood.putExtras(bFood);
+                view.getContext().startActivity(iFood);
+                ((Activity) view.getContext()).finish();
             }
         });
     }
