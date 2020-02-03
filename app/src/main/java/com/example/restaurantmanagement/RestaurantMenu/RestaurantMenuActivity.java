@@ -2,6 +2,7 @@ package com.example.restaurantmanagement.RestaurantMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -36,6 +37,11 @@ public class RestaurantMenuActivity extends AppCompatActivity {
             }
         });
 
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MenuAdapter menuAdapter = new MenuAdapter(fragmentManager);
+        viewPager.setAdapter(menuAdapter);
+
         txtCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +50,8 @@ public class RestaurantMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void AnhXa() {
