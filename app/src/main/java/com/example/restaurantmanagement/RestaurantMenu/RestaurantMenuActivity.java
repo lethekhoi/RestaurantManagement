@@ -29,7 +29,7 @@ public class RestaurantMenuActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar_menu.setTitle("Thực đơn");
+
         toolbar_menu.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

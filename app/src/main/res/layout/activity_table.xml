@@ -6,24 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".TableManagement.TableActivity">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/rvTable"
+        android:background="@drawable/header_color"
+        app:layout_constraintBottom_toTopOf="@+id/reaLay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Chọn bàn" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTable"
+    <RelativeLayout
+        android:id="@+id/reaLay"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBar" />
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/rvTable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/header_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

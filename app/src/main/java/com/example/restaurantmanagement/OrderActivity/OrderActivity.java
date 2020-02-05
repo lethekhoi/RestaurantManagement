@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.restaurantmanagement.R;
 import com.example.restaurantmanagement.RestaurantMenu.MenuInfo;
 import com.example.restaurantmanagement.RestaurantMenu.RestaurantMenuActivity;
+import com.example.restaurantmanagement.TableManagement.TableAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -24,7 +26,7 @@ public class OrderActivity extends AppCompatActivity {
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
 
-    private DatabaseReference mData;
+    private DatabaseReference mData, mData2;
 
     ImageView imgOrderFoodInfo, imgAdd, imgMinus, imgClose;
     TextView txtOrderFoodName, txtOrderFoodDetail, txtNumOrderFood;
@@ -84,7 +86,28 @@ public class OrderActivity extends AppCompatActivity {
                 addFood();
             }
         });
+        btnOrderFoodPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
 
+                oderFood = new OrderFoodInfo(txtOrderFoodName.getText().toString(),
+                        food.get(posFood).getPrice(),
+                        food.get(posFood).getDetail(),
+                        food.get(posFood).getUrl(),
+                        txtNumOrderFood.getText().toString(),
+                        Integer.toString(res)
+                );
+                mData.child("Table/" + "tb" + Integer.toString(TableAdapter.pos) + "/ListOder/").push().setValue(oderFood);
+                mData2 = FirebaseDatabase.getInstance().getReference("Table/" + "tb" + Integer.toString(TableAdapter.pos) + "/");
+                mData2.child("TinhTrang").setValue("Đã order");
+                finish();
+                Intent intent = new Intent(OrderActivity.this, RestaurantMenuActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
     }
 
     private void minusFood() {
@@ -121,6 +144,8 @@ public class OrderActivity extends AppCompatActivity {
 
         food = (ArrayList<MenuInfo>) foodBundle.getSerializable("infoFood");
         key = food.get(posFood).getFoodName();
+
+
     }
 
     private void AnhXa() {

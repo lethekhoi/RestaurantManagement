@@ -1,6 +1,9 @@
 package com.example.restaurantmanagement.TableManagement;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +21,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restaurantmanagement.PayActivity.PayFoodActivity;
 import com.example.restaurantmanagement.R;
 import com.example.restaurantmanagement.RestaurantMenu.RestaurantMenuActivity;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
+    private DatabaseReference mData, mData2;
     public static int pos;
     List<TableInfo> tableInfos = new ArrayList<>();
     Context context;
@@ -55,7 +60,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
         final int temp = position;
         imgTable.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View view) {
+            public boolean onLongClick(final View view) {
                 PopupMenu popupMenu = new PopupMenu(context, view);
 
                 popupMenu.getMenuInflater().inflate(R.menu.menu_table_diagram, popupMenu.getMenu());
@@ -75,9 +80,10 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
                                 context.startActivity(intentPay);
                                 break;
                             case R.id.menuTableCancel:
-                                //  mData = FirebaseDatabase.getInstance().getReference("Table/" + "tb" + Integer.toString(TableDiagramAdapter.pos) + "/ListOder/");
-                                //  mData2 = FirebaseDatabase.getInstance().getReference("Table/" + "tb" + Integer.toString(TableDiagramAdapter.pos) + "/");
-                                //  cancelTable(view);
+                                pos = temp + 1;
+                                mData = FirebaseDatabase.getInstance().getReference("Table/" + "tb" + Integer.toString(TableAdapter.pos) + "/ListOder/");
+                                mData2 = FirebaseDatabase.getInstance().getReference("Table/" + "tb" + Integer.toString(TableAdapter.pos) + "/");
+                                cancelTable(view);
                                 break;
                         }
 
@@ -97,6 +103,38 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
     public int getItemCount() {
         return tableInfos.size();
     }
+
+    private void cancelTable(final View v) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.Theme_AppCompat_DayNight_Dialog);
+        builder.setMessage("Bạn có chắc muốn hủy bàn ăn?");
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                mData.setValue(null);
+                mData2.child("TinhTrang").setValue("Trống");
+
+                Toast.makeText(v.getContext(), "Hủy thành công", Toast.LENGTH_SHORT).show();
+
+                ((Activity) v.getContext()).finish();
+
+                Intent intent = new Intent(v.getContext(), TableActivity.class);
+                v.getContext().startActivity(intent);
+
+                //  PayFoodActivity.totalPrice = 0;
+
+            }
+        });
+
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

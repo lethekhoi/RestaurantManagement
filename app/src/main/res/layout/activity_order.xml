@@ -8,10 +8,11 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:id="@+id/constraintLayoutTop"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="#1F4BBB"
+        android:background="@drawable/header_color"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,10 @@
                 android:id="@+id/imgFood"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="5dp"
+                android:paddingRight="8dp"
+
                 app:layout_constraintBottom_toTopOf="@id/txtFoodName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,11 +143,11 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="#FFFFFF"
-            android:text="1"
             android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            android:text="1"
             android:textColor="#0021FA"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/imgAdd"
             app:layout_constraintStart_toEndOf="@id/imgMinus"
@@ -163,10 +168,14 @@
             android:id="@+id/btnFoodPrice"
             android:layout_width="165dp"
             android:layout_height="46dp"
+            android:background="@drawable/bg_ui"
+            android:textColor="#ffff"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imgAdd"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="20000đ" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
