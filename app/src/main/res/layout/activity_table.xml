@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Chọn bàn" />
+        app:title="Chọn bàn"
+        app:titleTextColor="#ffff" />
 
     <RelativeLayout
         android:id="@+id/reaLay"
@@ -26,7 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar">
-
 
 
         <androidx.recyclerview.widget.RecyclerView

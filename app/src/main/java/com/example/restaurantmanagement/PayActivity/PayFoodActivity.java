@@ -5,13 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.restaurantmanagement.R;
+import com.example.restaurantmanagement.TableManagement.TableActivity;
 import com.example.restaurantmanagement.TableManagement.TableAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -85,17 +90,74 @@ public class PayFoodActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payFood();
+
+
+//                if (totalPrice == '0') {
+//                    final AlertDialog.Builder builder = new AlertDialog.Builder(PayFoodActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+//                    builder.setMessage("Bạn chưa chọn món ăn")
+//                            .setNegativeButton("Quay lại", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    return;
+//                                }
+//                            });
+//                } else {
+//                    payFood();
+//                }
+
+                if ((totalPrice == 0)) {
+                    trolai();
+                } else {
+                    payFood();
+                }
+
             }
         });
 
 
     }
 
+    private void trolai() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(PayFoodActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+
+        builder.setMessage("Bạn chưa chọn món ăn")
+                .setNegativeButton("Trở lại", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+        builder.show();
+    }
+
     private void payFood() {
 
+        final AlertDialog.Builder builder = new AlertDialog.Builder(PayFoodActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
 
+        builder.setMessage("Bạn có chắc muốn thanh toán?")
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mData.setValue(null);
+                        mData2.child("TinhTrang").setValue("Trống");
 
+                        Toast.makeText(getApplicationContext(), "Thanh toán thành công", Toast.LENGTH_SHORT).show();
+
+                        finish();
+
+                        Intent intent = new Intent(PayFoodActivity.this, TableActivity.class);
+                        startActivity(intent);
+
+                        totalPrice = 0;
+                    }
+                })
+                .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+        builder.show();
     }
 
 

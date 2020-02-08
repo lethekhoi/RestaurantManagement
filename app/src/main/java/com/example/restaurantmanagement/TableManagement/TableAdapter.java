@@ -91,7 +91,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
                     }
                 });
                 popupMenu.show();
-                Toast.makeText(context, temp + 1 + "", Toast.LENGTH_SHORT).show();
+
                 return false;
             }
         });
